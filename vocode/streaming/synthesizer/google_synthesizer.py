@@ -6,8 +6,6 @@ from concurrent.futures import ThreadPoolExecutor
 from typing import Any, Optional
 
 import aiohttp
-import google.auth
-from google.cloud import texttospeech as tts
 
 from vocode.streaming.agent.bot_sentiment_analyser import BotSentiment
 from vocode.streaming.models.message import BaseMessage
@@ -27,6 +25,9 @@ class GoogleSynthesizer(BaseSynthesizer[GoogleSynthesizerConfig]):
         aiohttp_session: Optional[aiohttp.ClientSession] = None,
     ):
         super().__init__(synthesizer_config, aiohttp_session)
+
+        from google.cloud import texttospeech as tts
+        import google.auth
 
         google.auth.default()
 

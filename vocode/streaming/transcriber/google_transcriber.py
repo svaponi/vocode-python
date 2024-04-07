@@ -2,8 +2,6 @@ import logging
 import queue
 from typing import Optional
 
-from google.cloud import speech
-
 from vocode.streaming.models.audio_encoding import AudioEncoding
 from vocode.streaming.models.transcriber import GoogleTranscriberConfig
 from vocode.streaming.transcriber.base_transcriber import (
@@ -21,6 +19,10 @@ class GoogleTranscriber(BaseThreadAsyncTranscriber[GoogleTranscriberConfig]):
     ):
         super().__init__(transcriber_config)
 
+        from google.cloud import speech
+        import google.auth
+
+        google.auth.default()
         self.speech = speech
 
         self._ended = False
