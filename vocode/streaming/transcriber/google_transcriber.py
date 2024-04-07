@@ -1,19 +1,13 @@
-import asyncio
 import logging
-import os
-import time
 import queue
 from typing import Optional
-import threading
-from vocode import getenv
 
 from vocode.streaming.models.audio_encoding import AudioEncoding
+from vocode.streaming.models.transcriber import GoogleTranscriberConfig
 from vocode.streaming.transcriber.base_transcriber import (
     BaseThreadAsyncTranscriber,
     Transcription,
 )
-from vocode.streaming.models.transcriber import GoogleTranscriberConfig
-from vocode.streaming.utils import create_loop_in_thread
 
 
 # TODO: make this nonblocking so it can run in the main thread, see speech.async_client.SpeechAsyncClient
