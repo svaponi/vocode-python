@@ -5,19 +5,18 @@ import signal
 
 from dotenv import load_dotenv
 
-load_dotenv()
-
-from vocode.streaming.streaming_conversation import StreamingConversation
 from vocode.helpers import create_streaming_microphone_input_and_speaker_output
-from vocode.streaming.transcriber import *
+from vocode.streaming.action.take_a_note_action import TakeANoteActionConfig
 from vocode.streaming.agent import *
-from vocode.streaming.synthesizer import *
-from vocode.streaming.models.transcriber import *
 from vocode.streaming.models.agent import *
-from vocode.streaming.models.synthesizer import *
 from vocode.streaming.models.message import BaseMessage
+from vocode.streaming.models.synthesizer import *
+from vocode.streaming.models.transcriber import *
+from vocode.streaming.streaming_conversation import StreamingConversation
+from vocode.streaming.synthesizer import *
+from vocode.streaming.transcriber import *
 
-
+load_dotenv()
 logging.basicConfig()
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -47,6 +46,7 @@ async def main():
             ChatGPTAgentConfig(
                 initial_message=BaseMessage(text="What's up"),
                 prompt_preamble="""The AI is having a pleasant conversation about life""",
+                actions=[TakeANoteActionConfig()],
             )
         ),
         synthesizer=GoogleSynthesizer(

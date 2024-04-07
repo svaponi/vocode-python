@@ -1,13 +1,16 @@
 import asyncio
 from enum import Enum
 from typing import Generic, Optional, TypeVar
+
 from pydantic.v1 import BaseModel
+
 from vocode.streaming.models.model import TypedModel
 
 
 class ActionType(str, Enum):
     BASE = "action_base"
     NYLAS_SEND_EMAIL = "action_nylas_send_email"
+    TAKE_A_NOTE = "action_take_a_note"
     TRANSFER_CALL = "action_transfer_call"
 
 
